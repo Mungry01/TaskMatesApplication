@@ -1,0 +1,125 @@
+﻿
+@{
+    ViewData["Title"] = "Ideas";
+}
+
+<body style="background-color: #fffae5;">
+
+    <!--header-->
+    <div class="d-flex justify-content-between align-items-center px-3 py-2">
+        <h1 class="h4 mb-0">💡 Ideas & Volunteering</h1>
+
+        <!-- Filter combobox -->
+        <select class="form-select w-auto text-white" style="background-color: #37818a">
+            <option value="1">ALL</option>
+            <option value="2">ATYCB</option>
+            <option value="3">CAS</option>
+            <option value="4">CCIS</option>
+            <option value="5">CEA</option>
+            <option value="6">CHS</option>
+        </select>
+    </div>
+
+    <!-- Scrollable Panel -->
+    <div class="card shadow-sm mb-4" style="max-height: 700px; overflow-y: auto; background-color: #fff3c3">
+        <div class="card-body">
+
+            <!-- Idea 1 -->
+            <div class="card mb-3 border-0 shadow-sm text-white" style="background-color:#37818a">
+                
+                <div class="card-body">
+                    <h5 class="card-title">Stop-Motion Sculpture</h5>
+                    <p class="card-text">
+                        Animates handcrafted 3D figures through frame-by-frame photography to create the illusion of motion.
+                    </p>
+                    <small class="text-white">By Zeus Awyan — 2024-01-15</small>
+                    <div class="mt-2 d-flex justify-content-between">
+                        <span class="badge bg-info">15 ❤️</span>
+                        <span class="badge bg-warning text-dark">2 volunteers</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Idea 2 -->
+            <div class="card mb-3 border-0 shadow-sm text-white" style ="background-color: #37818a">
+                <div class="card-body">
+                    <h5 class="card-title">Building Diorama</h5>
+                    <p class="card-text">
+                        Miniature 3D model depicting architectural structures or urban scenes in a sealed-down environment.
+                    </p>
+                    <small class="text-white">By Zeus Awyan — 2024-01-15</small>
+                    <div class="mt-2 d-flex justify-content-between">
+                        <span class="badge bg-info">11 ❤️</span>
+                        <span class="badge bg-warning text-dark">5 volunteers</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Idea 3 -->
+            <div class="card mb-3 border-0 shadow text-white" style="background-color: #37818a">
+                <div class="card-body">
+                    <h5 class="card-title">Pipe Cleaner Art Paintings</h5>
+                    <p class="card-text">
+                        Vibrant, tactile compositions where fuzzy wires are twisted, bent, and layered onto canvas for unique artworks.
+                    </p>
+                    <small class="text-white">By Zeus Awyan — 2024-01-15</small>
+                    <div class="mt-2 d-flex justify-content-between">
+                        <span class="badge bg-info">5 ❤️</span>
+                        <span class="badge bg-warning text-dark">3 volunteers</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Idea 4 -->
+            <div class="card mb-3 border-0 shadow text-white" style="background-color: #37818a">
+                <div class="card-body">
+                    <h5 class="card-title">To show its scrollable</h5>
+                    <p class="card-text">
+                        Vibrant, tactile compositions where fuzzy wires are twisted, bent, and layered onto canvas for unique artworks.
+                    </p>
+                    <small class="text-white">By Zeus Awyan — 2024-01-15</small>
+                    <div class="mt-2 d-flex justify-content-between">
+                        <span class="badge bg-info">5 ❤️</span>
+                        <span class="badge bg-warning text-dark">3 volunteers</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- idea submission panel -->
+    <div class="card shadow-sm "style="background-color: #37818a">
+        <div class="card-body">
+            <h5 class="card-title text-primary text-white">Submit New Idea</h5>
+            <form>
+                <div class="mb-3 text-white">
+                    <label class="form-label">Select Course</label>
+                    <select class="form-select">
+                        <option disabled selected>Choose...</option>
+                        <option>ATYCB</option>
+                        <option>CAS</option>
+                        <option>CCIS</option>
+                        <option>CEA</option>
+                        <option>CHS</option>
+                    </select>
+                </div>
+                <div class="mb-3 text-white">
+                    <label class="form-label">Idea Title</label>
+                    <input type="text" class="form-control" placeholder="Enter title">
+                </div>
+                <div class="mb-3 text-white">
+                    <label class="form-label">Idea Description</label>
+                    <textarea class="form-control" rows="3" placeholder="Describe your idea..."></textarea>
+                </div>
+                <button type="submit" class="btn w-100 text-white" style="background-color: #43ad7c;">
+                    Submit Idea
+                </button>
+            </form>
+        </div>
+    </div>
+
+    
+</body>
+
+

@@ -1,0 +1,105 @@
+﻿
+@{
+    ViewData["Title"] = "Events";
+}
+
+
+
+<body style="background-color: #fffae5;">
+
+    <!-- header -->
+    <div class="d-flex justify-content-between align-items-center px-3 py-2">
+        <h1 class="h4 mb-0">📅 Events</h1>
+
+    </div>
+
+
+    <!-- Scrollable Panel -->
+    <div class="card shadow-sm mb-4" style="max-height: 700px; overflow-y: auto; background-color: #fff3c3">
+        <div class="card-body">
+
+            <!-- Idea 1 -->
+            <div class="card mb-3 border-0 shadow-sm text-white" style="background-color:#43ad7c">
+
+                <div class="card-body">
+                    <h5 class="card-title">Programming Workshop Series</h5>
+                    <p class="card-text">
+                        Weekly workshops covering different programming languages and frameworks
+                    </p>
+                    <small class="text-white">By Zeus Awyan — 2024-01-15</small>
+                    <div class="mt-2 d-flex justify-content-between">
+                        <span class="badge bg-info">15 ❤️</span>
+                        <span class="text" style="color: greenyellow">Approved</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Idea 2 -->
+            <div class="card mb-3 border-0 shadow-sm text-white" style="background-color: #43ad7c">
+                <div class="card-body">
+                    <h5 class="card-title">Career Development Seminar</h5>
+                    <p class="card-text">
+                        Miniature 3D model depicting architectural structures or urban scenes in a sealed-down environment.
+                    </p>
+                    <small class="text-white">By Zeus Awyan — 2024-01-15</small>
+                    <div class="mt-2 d-flex justify-content-between">
+                        <span class="badge bg-info">11 ❤️</span>
+                        <span class="text" style="color: blue">Planned</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Idea 3 -->
+            <div class="card mb-3 border-0 shadow text-white" style="background-color: #43ad7c">
+                <div class="card-body">
+                    <h5 class="card-title">Environmental Cleanup Day</h5>
+                    <p class="card-text">
+                        Vibrant, tactile compositions where fuzzy wires are twisted, bent, and layered onto canvas for unique artworks.
+                    </p>
+                    <small class="text-white">By Zeus Awyan — 2024-01-15</small>
+                    <div class="mt-2 d-flex justify-content-between">
+                        <span class="badge bg-info">5 ❤️</span>
+                        <span class="text" style="color: yellow">Under Review</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Idea 4 -->
+            <div class="card mb-3 border-0 shadow text-white" style="background-color: #43ad7c">
+                <div class="card-body">
+                    <h5 class="card-title">To show its scrollable</h5>
+                    <p class="card-text">
+                        Vibrant, tactile compositions where fuzzy wires are twisted, bent, and layered onto canvas for unique artworks.
+                    </p>
+                    <small class="text-white">By Zeus Awyan — 2024-01-15</small>
+                    <div class="mt-2 d-flex justify-content-between">
+                        <span class="badge bg-info">5 ❤️</span>
+                        <span class="text" style="color: orangered">Rejected</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- idea submission panel -->
+    <div class="card shadow-sm " style="background-color: #43ad7c">
+        <div class="card-body">
+            <h5 class="card-title text-primary text-white">Submit Event Suggestion</h5>
+            <form>
+                <div class="mb-3 text-white">
+                    <label class="form-label">Event Title</label>
+                    <input type="text" class="form-control" placeholder="Enter title">
+                </div>
+                <div class="mb-3 text-white">
+                    <label class="form-label">Event Description</label>
+                    <textarea class="form-control" rows="3" placeholder="Describe your idea..."></textarea>
+                </div>
+                <button type="submit" class="btn w-100 text-white" style="background-color: #43ad7c;">
+                    Submit Idea
+                </button>
+            </form>
+        </div>
+    </div>
+</body>
+
