@@ -1,125 +1,549 @@
-﻿
-@{
-    ViewData["Title"] = "Ideas";
+﻿@{
+    ViewData["Title"] = "Ideas - TaskMates";
 }
 
-<body style="background-color: #fffae5;">
+<style>
+    body {
+        background-color: #f8f9fa;
+    }
 
-    <!--header-->
-    <div class="d-flex justify-content-between align-items-center px-3 py-2">
-        <h1 class="h4 mb-0">💡 Ideas & Volunteering</h1>
+    .ideas-header {
+        background: linear-gradient(135deg, #37818a 0%, #43ad7c 100%);
+        color: white;
+        padding: 1.5rem;
+        border-radius: 15px;
+        margin-bottom: 1.5rem;
+    }
 
-        <!-- Filter combobox -->
-        <select class="form-select w-auto text-white" style="background-color: #37818a">
-            <option value="1">ALL</option>
-            <option value="2">ATYCB</option>
-            <option value="3">CAS</option>
-            <option value="4">CCIS</option>
-            <option value="5">CEA</option>
-            <option value="6">CHS</option>
-        </select>
-    </div>
+    .ideas-panel {
+        background: white;
+        border-radius: 15px;
+        padding: 1.5rem;
+        max-height: 600px;
+        overflow-y: auto;
+        margin-bottom: 2rem;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
 
-    <!-- Scrollable Panel -->
-    <div class="card shadow-sm mb-4" style="max-height: 700px; overflow-y: auto; background-color: #fff3c3">
-        <div class="card-body">
+    .idea-card {
+        background: linear-gradient(135deg, #37818a 0%, #3ca166 100%);
+        color: white;
+        border-radius: 15px;
+        padding: 1.5rem;
+        margin-bottom: 1rem;
+        cursor: pointer;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        border: none;
+    }
 
-            <!-- Idea 1 -->
-            <div class="card mb-3 border-0 shadow-sm text-white" style="background-color:#37818a">
-                
-                <div class="card-body">
-                    <h5 class="card-title">Stop-Motion Sculpture</h5>
-                    <p class="card-text">
-                        Animates handcrafted 3D figures through frame-by-frame photography to create the illusion of motion.
-                    </p>
-                    <small class="text-white">By Zeus Awyan — 2024-01-15</small>
-                    <div class="mt-2 d-flex justify-content-between">
-                        <span class="badge bg-info">15 ❤️</span>
-                        <span class="badge bg-warning text-dark">2 volunteers</span>
-                    </div>
-                </div>
+    .idea-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 15px rgba(0,0,0,0.2);
+    }
+
+    .submission-panel {
+        background: white;
+        border-radius: 15px;
+        padding: 2rem;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+
+    .role-student .submission-panel {
+        display: block;
+    }
+
+    .role-admin .submission-panel,
+    .role-faculty .submission-panel {
+        display: block;
+    }
+
+    .badge-endorsed {
+        background-color: #ffc107;
+        color: #000;
+        font-weight: bold;
+    }
+
+    .comment-card {
+        border-left: 3px solid #dee2e6;
+        padding: 1rem;
+        margin-bottom: 0.5rem;
+        background: #f8f9fa;
+        border-radius: 5px;
+    }
+
+    .comment-card.faculty-comment {
+        border-left-color: #2c5aa0;
+        background: #e7f3ff;
+    }
+</style>
+
+<div class="container-fluid px-4">
+    <!-- Header -->
+    <div class="ideas-header">
+        <div class="d-flex justify-content-between align-items-center">
+            <div>
+                <h1 class="h3 fw-bold mb-2">💡 Ideas & Volunteering</h1>
+                <p class="mb-0">Share your creative ideas and volunteer for projects</p>
             </div>
-
-            <!-- Idea 2 -->
-            <div class="card mb-3 border-0 shadow-sm text-white" style ="background-color: #37818a">
-                <div class="card-body">
-                    <h5 class="card-title">Building Diorama</h5>
-                    <p class="card-text">
-                        Miniature 3D model depicting architectural structures or urban scenes in a sealed-down environment.
-                    </p>
-                    <small class="text-white">By Zeus Awyan — 2024-01-15</small>
-                    <div class="mt-2 d-flex justify-content-between">
-                        <span class="badge bg-info">11 ❤️</span>
-                        <span class="badge bg-warning text-dark">5 volunteers</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Idea 3 -->
-            <div class="card mb-3 border-0 shadow text-white" style="background-color: #37818a">
-                <div class="card-body">
-                    <h5 class="card-title">Pipe Cleaner Art Paintings</h5>
-                    <p class="card-text">
-                        Vibrant, tactile compositions where fuzzy wires are twisted, bent, and layered onto canvas for unique artworks.
-                    </p>
-                    <small class="text-white">By Zeus Awyan — 2024-01-15</small>
-                    <div class="mt-2 d-flex justify-content-between">
-                        <span class="badge bg-info">5 ❤️</span>
-                        <span class="badge bg-warning text-dark">3 volunteers</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Idea 4 -->
-            <div class="card mb-3 border-0 shadow text-white" style="background-color: #37818a">
-                <div class="card-body">
-                    <h5 class="card-title">To show its scrollable</h5>
-                    <p class="card-text">
-                        Vibrant, tactile compositions where fuzzy wires are twisted, bent, and layered onto canvas for unique artworks.
-                    </p>
-                    <small class="text-white">By Zeus Awyan — 2024-01-15</small>
-                    <div class="mt-2 d-flex justify-content-between">
-                        <span class="badge bg-info">5 ❤️</span>
-                        <span class="badge bg-warning text-dark">3 volunteers</span>
-                    </div>
-                </div>
-            </div>
-
+            <select class="form-select w-auto" id="courseFilter" style="max-width: 200px;">
+                <option value="all">All Courses</option>
+                <option value="Environmental Science">Environmental Science</option>
+                <option value="Computer Science">Computer Science</option>
+                <option value="Psychology">Psychology</option>
+                <option value="Engineering">Engineering</option>
+                <option value="Arts">Arts</option>
+            </select>
         </div>
     </div>
 
-    <!-- idea submission panel -->
-    <div class="card shadow-sm "style="background-color: #37818a">
-        <div class="card-body">
-            <h5 class="card-title text-primary text-white">Submit New Idea</h5>
-            <form>
-                <div class="mb-3 text-white">
-                    <label class="form-label">Select Course</label>
-                    <select class="form-select">
-                        <option disabled selected>Choose...</option>
-                        <option>ATYCB</option>
-                        <option>CAS</option>
-                        <option>CCIS</option>
-                        <option>CEA</option>
-                        <option>CHS</option>
+    <!-- Ideas Panel -->
+    <div class="ideas-panel">
+        <div id="ideasContainer">
+            <div class="text-center py-5">
+                <div class="spinner-border text-primary" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+                <p class="mt-2 text-muted">Loading ideas...</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Submission Panel -->
+    <div class="submission-panel" id="submissionPanel">
+        <h5 class="fw-bold mb-3" style="color: #37818a;">📝 Submit New Idea</h5>
+        <form id="ideaForm">
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label class="form-label fw-bold">Course</label>
+                    <select class="form-select" id="ideaCourse" required>
+                        <option value="" disabled selected>Choose a course...</option>
+                        <option value="Environmental Science">Environmental Science</option>
+                        <option value="Computer Science">Computer Science</option>
+                        <option value="Psychology">Psychology</option>
+                        <option value="Engineering">Engineering</option>
+                        <option value="Arts">Arts</option>
+                        <option value="Business">Business</option>
                     </select>
                 </div>
-                <div class="mb-3 text-white">
-                    <label class="form-label">Idea Title</label>
-                    <input type="text" class="form-control" placeholder="Enter title">
+                <div class="col-md-6 mb-3">
+                    <label class="form-label fw-bold">Title</label>
+                    <input type="text" class="form-control" id="ideaTitle" placeholder="Enter idea title" required>
                 </div>
-                <div class="mb-3 text-white">
-                    <label class="form-label">Idea Description</label>
-                    <textarea class="form-control" rows="3" placeholder="Describe your idea..."></textarea>
+            </div>
+            <div class="mb-3">
+                <label class="form-label fw-bold">Description</label>
+                <textarea class="form-control" id="ideaDescription" rows="4" placeholder="Describe your idea in detail..." required></textarea>
+            </div>
+            <button type="submit" class="btn btn-lg w-100 text-white fw-bold" style="background-color: #43ad7c;">
+                🚀 Submit Idea
+            </button>
+        </form>
+    </div>
+</div>
+
+<!-- Idea Details Modal -->
+<div class="modal fade" id="ideaModal" tabindex="-1">
+    <div class="modal-dialog modal-lg modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header" style="background: linear-gradient(135deg, #37818a 0%, #43ad7c 100%); color: white;">
+                <h5 class="modal-title fw-bold" id="modalTitle">Idea Details</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <div id="modalContent"></div>
+                
+                <!-- Comments Section -->
+                <div class="mt-4">
+                    <h6 class="fw-bold mb-3">💬 Comments</h6>
+                    <div id="commentsContainer"></div>
+                    
+                    <!-- Add Comment Form -->
+                    <div class="mt-3">
+                        <textarea class="form-control" id="newComment" placeholder="Add your comment..." rows="3"></textarea>
+                        <button class="btn btn-primary mt-2" onclick="addComment()">
+                            <i class="bi bi-send"></i> Post Comment
+                        </button>
+                    </div>
                 </div>
-                <button type="submit" class="btn w-100 text-white" style="background-color: #43ad7c;">
-                    Submit Idea
-                </button>
-            </form>
+            </div>
         </div>
     </div>
+</div>
 
-    
-</body>
+@section Scripts {
+    <script>
+        // Get user info from server-side session
+        let currentUser = {
+            name: '@Context.Session.GetString("UserName")',
+            role: '@Context.Session.GetString("UserRole")',
+            email: '@Context.Session.GetString("UserEmail")'
+        };
 
+        let allIdeas = [];
+        let currentIdeaId = null;
 
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', function() {
+            setupRoleBasedFeatures();
+            loadIdeas();
+            setupFormSubmission();
+            setupFiltering();
+        });
+
+        function setupRoleBasedFeatures() {
+            const submissionPanel = document.getElementById('submissionPanel');
+            
+            // Students and Faculty can submit ideas
+            if (currentUser.role === 'admin') {
+                // Admins can see the form but we'll add a note
+                submissionPanel.innerHTML = `
+                    <div class="alert alert-info">
+                        <i class="bi bi-info-circle"></i> 
+                        As an administrator, you can manage and moderate ideas but typically don't submit them.
+                    </div>
+                ` + submissionPanel.innerHTML;
+            }
+        }
+
+        async function loadIdeas() {
+            try {
+                const response = await fetch('/api/ideas');
+                allIdeas = await response.json();
+                displayIdeas(allIdeas);
+            } catch (error) {
+                console.error('Error loading ideas:', error);
+                document.getElementById('ideasContainer').innerHTML = `
+                    <div class="alert alert-danger">
+                        <i class="bi bi-exclamation-triangle"></i> Failed to load ideas. Please refresh the page.
+                    </div>
+                `;
+            }
+        }
+
+        function displayIdeas(ideas) {
+            const container = document.getElementById('ideasContainer');
+            
+            if (ideas.length === 0) {
+                container.innerHTML = `
+                    <div class="text-center py-5">
+                        <h4 class="text-muted">No ideas found</h4>
+                        <p>Be the first to share an idea!</p>
+                    </div>
+                `;
+                return;
+            }
+
+            container.innerHTML = ideas.map(idea => `
+                <div class="idea-card" onclick="showIdeaDetails('${idea.id}')" data-course="${idea.course}">
+                    <div class="d-flex justify-content-between align-items-start">
+                        <div class="flex-grow-1">
+                            <h5 class="fw-bold mb-2">${escapeHtml(idea.title)}</h5>
+                            <p class="mb-2">${truncate(escapeHtml(idea.description), 150)}</p>
+                            <small>By ${escapeHtml(idea.author)} • ${formatDate(idea.createdDate)}</small>
+                        </div>
+                        <div class="ms-3 text-end">
+                            <div class="mb-2">
+                                <span class="badge bg-light text-dark">❤️ ${idea.likes}</span>
+                                <span class="badge bg-warning text-dark">🤝 ${idea.volunteers}</span>
+                            </div>
+                            ${idea.isEndorsed ? `<span class="badge badge-endorsed">✅ Endorsed by ${escapeHtml(idea.endorsedBy)}</span>` : '<span class="badge bg-secondary">Pending</span>'}
+                        </div>
+                    </div>
+                    <div class="mt-3 d-flex flex-wrap gap-2">
+                        <button class="btn btn-sm btn-outline-light" onclick="event.stopPropagation(); toggleLike('${idea.id}')">
+                            <span id="like-${idea.id}">${idea.likedBy.includes(currentUser.name) ? '❤️ Liked' : '❤️ Like'}</span>
+                        </button>
+                        ${currentUser.role === 'student' ? `
+                            <button class="btn btn-sm btn-outline-light" onclick="event.stopPropagation(); toggleVolunteer('${idea.id}')">
+                                <span id="volunteer-${idea.id}">${idea.volunteeredBy.includes(currentUser.name) ? '✅ Volunteered' : '🤝 Volunteer'}</span>
+                            </button>
+                        ` : ''}
+                        ${currentUser.role === 'faculty' ? `
+                            <button class="btn btn-sm ${idea.endorsedBy === currentUser.name ? 'btn-warning' : 'btn-success'}" onclick="event.stopPropagation(); endorseIdea('${idea.id}')">
+                                ${idea.endorsedBy === currentUser.name ? '❌ Cancel Endorsement' : '✅ Endorse'}
+                            </button>
+                        ` : ''}
+                        ${currentUser.role === 'admin' ? `
+                            <button class="btn btn-sm btn-danger" onclick="event.stopPropagation(); deleteIdea('${idea.id}')">
+                                🗑️ Delete
+                            </button>
+                        ` : ''}
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        async function showIdeaDetails(ideaId) {
+            currentIdeaId = ideaId;
+            try {
+                const response = await fetch(`/api/ideas/${ideaId}`);
+                const data = await response.json();
+                const idea = data.idea;
+                const comments = data.comments;
+
+                const modal = new bootstrap.Modal(document.getElementById('ideaModal'));
+                document.getElementById('modalTitle').textContent = idea.title;
+                
+                document.getElementById('modalContent').innerHTML = `
+                    <div class="row">
+                        <div class="col-md-8">
+                            <h6 class="fw-bold">Description</h6>
+                            <p>${escapeHtml(idea.description)}</p>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card bg-light">
+                                <div class="card-body">
+                                    <h6 class="fw-bold mb-3">Details</h6>
+                                    <ul class="list-unstyled">
+                                        <li class="mb-2"><strong>Author:</strong> ${escapeHtml(idea.author)}</li>
+                                        <li class="mb-2"><strong>Course:</strong> ${escapeHtml(idea.course)}</li>
+                                        <li class="mb-2"><strong>Date:</strong> ${formatDate(idea.createdDate)}</li>
+                                        <li class="mb-2"><strong>Likes:</strong> ❤️ ${idea.likes}</li>
+                                        <li class="mb-2"><strong>Volunteers:</strong> 🤝 ${idea.volunteers}</li>
+                                        ${idea.isEndorsed ? `<li class="mb-2"><strong>Endorsed by:</strong> <span class="badge badge-endorsed">${escapeHtml(idea.endorsedBy)}</span></li>` : '<li class="mb-2"><span class="badge bg-secondary">Not Yet Endorsed</span></li>'}
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+
+                displayComments(comments);
+                modal.show();
+            } catch (error) {
+                console.error('Error loading idea details:', error);
+                alert('Failed to load idea details');
+            }
+        }
+
+        function displayComments(comments) {
+            const container = document.getElementById('commentsContainer');
+            
+            if (comments.length === 0) {
+                container.innerHTML = '<p class="text-muted">No comments yet. Be the first to comment!</p>';
+                return;
+            }
+
+            // Sort comments: faculty first, then by date
+            comments.sort((a, b) => {
+                if (a.authorRole === 'faculty' && b.authorRole !== 'faculty') return -1;
+                if (a.authorRole !== 'faculty' && b.authorRole === 'faculty') return 1;
+                return new Date(b.createdDate) - new Date(a.createdDate);
+            });
+
+            container.innerHTML = comments.map(comment => `
+                <div class="comment-card ${comment.authorRole === 'faculty' ? 'faculty-comment' : ''}">
+                    <div class="d-flex justify-content-between">
+                        <h6 class="mb-1 ${comment.authorRole === 'faculty' ? 'text-primary' : ''}">
+                            ${escapeHtml(comment.authorName)} 
+                            ${comment.authorRole === 'faculty' ? '👨‍🏫' : ''}
+                            ${comment.authorRole === 'admin' ? '⚙️' : ''}
+                        </h6>
+                        <small class="text-muted">${formatDate(comment.createdDate)}</small>
+                    </div>
+                    <p class="mb-0">${escapeHtml(comment.content)}</p>
+                </div>
+            `).join('');
+        }
+
+        async function addComment() {
+            const commentText = document.getElementById('newComment').value.trim();
+            
+            if (!commentText) {
+                alert('Please enter a comment');
+                return;
+            }
+
+            try {
+                const comment = {
+                    content: commentText,
+                    authorName: currentUser.name,
+                    authorRole: currentUser.role,
+                    itemId: currentIdeaId,
+                    itemType: 'idea'
+                };
+
+                const response = await fetch('/api/comments', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(comment)
+                });
+
+                if (response.ok) {
+                    document.getElementById('newComment').value = '';
+                    // Reload comments
+                    const dataResponse = await fetch(`/api/ideas/${currentIdeaId}`);
+                    const data = await dataResponse.json();
+                    displayComments(data.comments);
+                } else {
+                    alert('Failed to add comment');
+                }
+            } catch (error) {
+                console.error('Error adding comment:', error);
+                alert('Failed to add comment');
+            }
+        }
+
+        async function toggleLike(ideaId) {
+            try {
+                const response = await fetch(`/api/ideas/${ideaId}/like`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ userName: currentUser.name })
+                });
+
+                if (response.ok) {
+                    await loadIdeas();
+                }
+            } catch (error) {
+                console.error('Error toggling like:', error);
+            }
+        }
+
+        async function toggleVolunteer(ideaId) {
+            try {
+                const response = await fetch(`/api/ideas/${ideaId}/volunteer`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ userName: currentUser.name })
+                });
+
+                if (response.ok) {
+                    const data = await response.json();
+                    alert('Thank you for your interest! The idea creator will be notified.');
+                    await loadIdeas();
+                }
+            } catch (error) {
+                console.error('Error toggling volunteer:', error);
+            }
+        }
+
+        async function endorseIdea(ideaId) {
+            if (currentUser.role !== 'faculty') {
+                alert('Only faculty members can endorse ideas');
+                return;
+            }
+
+            try {
+                const response = await fetch(`/api/ideas/${ideaId}/endorse`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ facultyName: currentUser.name })
+                });
+
+                if (response.ok) {
+                    // Reload ideas to reflect the toggle (endorsed or canceled)
+                    await loadIdeas();
+                }
+            } catch (error) {
+                console.error('Error toggling endorsement:', error);
+            }
+        }
+
+        async function deleteIdea(ideaId) {
+            if (currentUser.role !== 'admin') {
+                alert('Only administrators can delete ideas');
+                return;
+            }
+
+            if (!confirm('Are you sure you want to delete this idea? This action cannot be undone.')) {
+                return;
+            }
+
+            try {
+                const response = await fetch(`/api/ideas/${ideaId}`, {
+                    method: 'DELETE'
+                });
+
+                if (response.ok) {
+                    alert('Idea deleted successfully');
+                    await loadIdeas();
+                }
+            } catch (error) {
+                console.error('Error deleting idea:', error);
+            }
+        }
+
+        function setupFormSubmission() {
+            const form = document.getElementById('ideaForm');
+            form.addEventListener('submit', async function(e) {
+                e.preventDefault();
+
+                const title = document.getElementById('ideaTitle').value;
+                const description = document.getElementById('ideaDescription').value;
+                const course = document.getElementById('ideaCourse').value;
+
+                const idea = {
+                    title: title,
+                    description: description,
+                    course: course,
+                    author: currentUser.name,
+                    createdDate: new Date().toISOString()
+                };
+
+                try {
+                    const response = await fetch('/api/ideas', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(idea)
+                    });
+
+                    if (response.ok) {
+                        alert('Idea submitted successfully! 🎉');
+                        form.reset();
+                        await loadIdeas();
+                        // Scroll to top to see the new idea
+                        document.querySelector('.ideas-panel').scrollTop = 0;
+                    } else {
+                        alert('Failed to submit idea. Please try again.');
+                    }
+                } catch (error) {
+                    console.error('Error submitting idea:', error);
+                    alert('Failed to submit idea. Please try again.');
+                }
+            });
+        }
+
+        function setupFiltering() {
+            const courseFilter = document.getElementById('courseFilter');
+            courseFilter.addEventListener('change', function() {
+                const selectedCourse = this.value;
+                
+                if (selectedCourse === 'all') {
+                    displayIdeas(allIdeas);
+                } else {
+                    const filtered = allIdeas.filter(idea => idea.course === selectedCourse);
+                    displayIdeas(filtered);
+                }
+            });
+        }
+
+        // Utility functions
+        function truncate(text, length) {
+            return text.length > length ? text.substring(0, length) + '...' : text;
+        }
+
+        function formatDate(dateString) {
+            const date = new Date(dateString);
+            const now = new Date();
+            const diffTime = Math.abs(now - date);
+            const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+            
+            if (diffDays === 0) return 'Today';
+            if (diffDays === 1) return 'Yesterday';
+            if (diffDays < 7) return `${diffDays} days ago`;
+            return date.toLocaleDateString();
+        }
+
+        function escapeHtml(text) {
+            const map = {
+                '&': '&amp;',
+                '<': '&lt;',
+                '>': '&gt;',
+                '"': '&quot;',
+                "'": '&#039;'
+            };
+            return text ? text.replace(/[&<>"']/g, m => map[m]) : '';
+        }
+    </script>
+}

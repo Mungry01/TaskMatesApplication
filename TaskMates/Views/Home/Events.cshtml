@@ -1,105 +1,578 @@
-﻿
-@{
-    ViewData["Title"] = "Events";
+﻿@{
+    ViewData["Title"] = "Events - TaskMates";
 }
 
+<style>
+    body {
+        background-color: #f8f9fa;
+    }
+
+    .events-header {
+        background: linear-gradient(135deg, #2c5aa0 0%, #37818a 100%);
+        color: white;
+        padding: 1.5rem;
+        border-radius: 15px;
+        margin-bottom: 1.5rem;
+    }
+
+    .events-panel {
+        background: white;
+        border-radius: 15px;
+        padding: 1.5rem;
+        max-height: 600px;
+        overflow-y: auto;
+        margin-bottom: 2rem;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+
+    .event-card {
+        background: linear-gradient(135deg, #2c5aa0 0%, #37818a 100%);
+        color: white;
+        border-radius: 15px;
+        padding: 1.5rem;
+        margin-bottom: 1rem;
+        cursor: pointer;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        border: none;
+    }
+
+    .event-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 15px rgba(0,0,0,0.2);
+    }
+
+    .submission-panel {
+        background: white;
+        border-radius: 15px;
+        padding: 2rem;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+
+    .status-badge {
+        font-size: 0.85rem;
+        padding: 0.5rem 1rem;
+        border-radius: 50px;
+        font-weight: bold;
+        color: white;
+    }
+
+    .status-0 { /* Under Review */
+        background-color: #f59e0b; /* Orange */
+    }
+
+    .status-1 { /* Approved */
+        background-color: #10b981; /* Green */
+    }
+
+    .status-2 { /* Planned */
+        background-color: #3b82f6; /* Blue */
+    }
+
+    .status-3 { /* Rejected */
+        background-color: #ef4444; /* Red */
+    }
 
 
-<body style="background-color: #fffae5;">
+    .comment-card {
+        border-left: 3px solid #dee2e6;
+        padding: 1rem;
+        margin-bottom: 0.5rem;
+        background: #f8f9fa;
+        border-radius: 5px;
+    }
 
-    <!-- header -->
-    <div class="d-flex justify-content-between align-items-center px-3 py-2">
-        <h1 class="h4 mb-0">📅 Events</h1>
+    .comment-card.faculty-comment {
+        border-left-color: #2c5aa0;
+        background: #e7f3ff;
+    }
+</style>
 
-    </div>
-
-
-    <!-- Scrollable Panel -->
-    <div class="card shadow-sm mb-4" style="max-height: 700px; overflow-y: auto; background-color: #fff3c3">
-        <div class="card-body">
-
-            <!-- Idea 1 -->
-            <div class="card mb-3 border-0 shadow-sm text-white" style="background-color:#43ad7c">
-
-                <div class="card-body">
-                    <h5 class="card-title">Programming Workshop Series</h5>
-                    <p class="card-text">
-                        Weekly workshops covering different programming languages and frameworks
-                    </p>
-                    <small class="text-white">By Zeus Awyan — 2024-01-15</small>
-                    <div class="mt-2 d-flex justify-content-between">
-                        <span class="badge bg-info">15 ❤️</span>
-                        <span class="text" style="color: greenyellow">Approved</span>
-                    </div>
-                </div>
+<div class="container-fluid px-4">
+    <!-- Header -->
+    <div class="events-header">
+        <div class="d-flex justify-content-between align-items-center">
+            <div>
+                <h1 class="h3 fw-bold mb-2">📅 Events Management</h1>
+                <p class="mb-0">Browse and manage school events</p>
             </div>
-
-            <!-- Idea 2 -->
-            <div class="card mb-3 border-0 shadow-sm text-white" style="background-color: #43ad7c">
-                <div class="card-body">
-                    <h5 class="card-title">Career Development Seminar</h5>
-                    <p class="card-text">
-                        Miniature 3D model depicting architectural structures or urban scenes in a sealed-down environment.
-                    </p>
-                    <small class="text-white">By Zeus Awyan — 2024-01-15</small>
-                    <div class="mt-2 d-flex justify-content-between">
-                        <span class="badge bg-info">11 ❤️</span>
-                        <span class="text" style="color: blue">Planned</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Idea 3 -->
-            <div class="card mb-3 border-0 shadow text-white" style="background-color: #43ad7c">
-                <div class="card-body">
-                    <h5 class="card-title">Environmental Cleanup Day</h5>
-                    <p class="card-text">
-                        Vibrant, tactile compositions where fuzzy wires are twisted, bent, and layered onto canvas for unique artworks.
-                    </p>
-                    <small class="text-white">By Zeus Awyan — 2024-01-15</small>
-                    <div class="mt-2 d-flex justify-content-between">
-                        <span class="badge bg-info">5 ❤️</span>
-                        <span class="text" style="color: yellow">Under Review</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Idea 4 -->
-            <div class="card mb-3 border-0 shadow text-white" style="background-color: #43ad7c">
-                <div class="card-body">
-                    <h5 class="card-title">To show its scrollable</h5>
-                    <p class="card-text">
-                        Vibrant, tactile compositions where fuzzy wires are twisted, bent, and layered onto canvas for unique artworks.
-                    </p>
-                    <small class="text-white">By Zeus Awyan — 2024-01-15</small>
-                    <div class="mt-2 d-flex justify-content-between">
-                        <span class="badge bg-info">5 ❤️</span>
-                        <span class="text" style="color: orangered">Rejected</span>
-                    </div>
-                </div>
-            </div>
-
+            <select class="form-select w-auto" id="statusFilter" style="max-width: 200px;">
+                <option value="all">All Statuses</option>
+                <option value="0">Under Review</option>
+                <option value="1">Approved</option>
+                <option value="2">Planned</option>
+                <option value="3">Rejected</option>
+            </select>
         </div>
     </div>
 
-    <!-- idea submission panel -->
-    <div class="card shadow-sm " style="background-color: #43ad7c">
-        <div class="card-body">
-            <h5 class="card-title text-primary text-white">Submit Event Suggestion</h5>
-            <form>
-                <div class="mb-3 text-white">
-                    <label class="form-label">Event Title</label>
-                    <input type="text" class="form-control" placeholder="Enter title">
+    <!-- Events Panel -->
+    <div class="events-panel">
+        <div id="eventsContainer">
+            <div class="text-center py-5">
+                <div class="spinner-border text-primary" role="status">
+                    <span class="visually-hidden">Loading...</span>
                 </div>
-                <div class="mb-3 text-white">
-                    <label class="form-label">Event Description</label>
-                    <textarea class="form-control" rows="3" placeholder="Describe your idea..."></textarea>
-                </div>
-                <button type="submit" class="btn w-100 text-white" style="background-color: #43ad7c;">
-                    Submit Idea
-                </button>
-            </form>
+                <p class="mt-2 text-muted">Loading events...</p>
+            </div>
         </div>
     </div>
-</body>
 
+    <!-- Submission Panel -->
+    <div class="submission-panel" id="submissionPanel">
+        <h5 class="fw-bold mb-3" style="color: #2c5aa0;">📝 Suggest New Event</h5>
+        <form id="eventForm">
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label class="form-label fw-bold">Event Title</label>
+                    <input type="text" class="form-control" id="eventTitle" placeholder="Enter event title" required>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label class="form-label fw-bold">Proposed Date</label>
+                    <input type="date" class="form-control" id="eventDate">
+                </div>
+            </div>
+            <div class="mb-3">
+                <label class="form-label fw-bold">Description</label>
+                <textarea class="form-control" id="eventDescription" rows="4" placeholder="Describe the event..." required></textarea>
+            </div>
+            <div class="mb-3">
+                <label class="form-label fw-bold">Expected Participants</label>
+                <input type="number" class="form-control" id="eventParticipants" placeholder="Estimated number of participants" min="1">
+            </div>
+            <button type="submit" class="btn btn-lg w-100 text-white fw-bold" style="background-color: #2c5aa0;">
+                🚀 Suggest Event
+            </button>
+        </form>
+    </div>
+</div>
+
+<!-- Event Details Modal -->
+<div class="modal fade" id="eventModal" tabindex="-1">
+    <div class="modal-dialog modal-lg modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header" style="background: linear-gradient(135deg, #2c5aa0 0%, #37818a 100%); color: white;">
+                <h5 class="modal-title fw-bold" id="modalTitle">Event Details</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <div id="modalContent"></div>
+                
+                <!-- Comments Section -->
+                <div class="mt-4">
+                    <h6 class="fw-bold mb-3">💬 Comments</h6>
+                    <div id="commentsContainer"></div>
+                    
+                    <!-- Add Comment Form -->
+                    <div class="mt-3">
+                        <textarea class="form-control" id="newComment" placeholder="Add your comment..." rows="3"></textarea>
+                        <button class="btn btn-primary mt-2" onclick="addComment()">
+                            <i class="bi bi-send"></i> Post Comment
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Status Update Modal (Admin Only) -->
+<div class="modal fade" id="statusModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Update Event Status</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <div class="mb-3">
+                    <label class="form-label fw-bold">Select New Status</label>
+                    <select class="form-select" id="newStatusSelect">
+                        <option value="0">Under Review</option>
+                        <option value="1">Approved</option>
+                        <option value="2">Planned</option>
+                        <option value="3">Rejected</option>
+                    </select>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-primary" onclick="confirmStatusUpdate()">Update Status</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        // Get user info from server-side session
+        let currentUser = {
+            name: '@Context.Session.GetString("UserName")',
+            role: '@Context.Session.GetString("UserRole")',
+            email: '@Context.Session.GetString("UserEmail")'
+        };
+
+        let allEvents = [];
+        let currentEventId = null;
+
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', function() {
+            loadEvents();
+            setupFormSubmission();
+            setupFiltering();
+        });
+
+        async function loadEvents() {
+            try {
+                const response = await fetch('/api/events');
+                allEvents = await response.json();
+                displayEvents(allEvents);
+            } catch (error) {
+                console.error('Error loading events:', error);
+                document.getElementById('eventsContainer').innerHTML = `
+                    <div class="alert alert-danger">
+                        <i class="bi bi-exclamation-triangle"></i> Failed to load events. Please refresh the page.
+                    </div>
+                `;
+            }
+        }
+
+        function displayEvents(events) {
+            const container = document.getElementById('eventsContainer');
+            
+            if (events.length === 0) {
+                container.innerHTML = `
+                    <div class="text-center py-5">
+                        <h4 class="text-muted">No events found</h4>
+                        <p>Be the first to suggest an event!</p>
+                    </div>
+                `;
+                return;
+            }
+
+            container.innerHTML = events.map(event => `
+                <div class="event-card" onclick="showEventDetails('${event.id}')" data-status="${event.status}">
+                    <div class="d-flex justify-content-between align-items-start">
+                        <div class="flex-grow-1">
+                            <h5 class="fw-bold mb-2">${escapeHtml(event.title)}</h5>
+                            <p class="mb-2">${truncate(escapeHtml(event.description), 150)}</p>
+                            <small>By ${escapeHtml(event.author)} • ${formatDate(event.createdDate)}</small>
+                            ${event.proposedDate ? `<br><small>📅 Proposed: ${new Date(event.proposedDate).toLocaleDateString()}</small>` : ''}
+                        </div>
+                        <div class="ms-3 text-end">
+                            <div class="mb-2">
+                                <span class="status-badge status-${event.status}">${getStatusText(event.status)}</span>
+                            </div>
+                            <div class="mb-2">
+                                <span class="badge bg-light text-dark">❤️ ${event.likes}</span>
+                                ${event.isEndorsed ? `<span class="badge bg-warning text-dark ms-1">✅ ${escapeHtml(event.endorsedBy)}</span>` : ''}
+                                ${event.isFacultyChosen ? `<span class="badge bg-warning text-dark ms-1">⭐ Faculty Choice</span>` : ''}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-3 d-flex flex-wrap gap-2">
+                        <button class="btn btn-sm btn-outline-light" onclick="event.stopPropagation(); toggleLike('${event.id}')">
+                            <span id="like-${event.id}">${event.likedBy.includes(currentUser.name) ? '❤️ Liked' : '❤️ Like'}</span>
+                        </button>
+                        ${currentUser.role === 'admin' ? `
+                            <button class="btn btn-sm btn-warning" onclick="event.stopPropagation(); showStatusModal('${event.id}', '${event.status}')">
+                                🔄 Change Status
+                            </button>
+                            <button class="btn btn-sm btn-danger" onclick="event.stopPropagation(); deleteEvent('${event.id}')">
+                                🗑️ Delete
+                            </button>
+                        ` : ''}
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        async function showEventDetails(eventId) {
+            currentEventId = eventId;
+            try {
+                const response = await fetch(`/api/events/${eventId}`);
+                const data = await response.json();
+                const event = data.eventItem;
+                const comments = data.comments;
+
+                const modal = new bootstrap.Modal(document.getElementById('eventModal'));
+                document.getElementById('modalTitle').textContent = event.title;
+                
+                document.getElementById('modalContent').innerHTML = `
+                    <div class="row">
+                        <div class="col-md-8">
+                            <h6 class="fw-bold">Description</h6>
+                            <p>${escapeHtml(event.description)}</p>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card bg-light">
+                                <div class="card-body">
+                                    <h6 class="fw-bold mb-3">Details</h6>
+                                    <ul class="list-unstyled">
+                                        <li class="mb-2"><strong>Author:</strong> ${escapeHtml(event.author)}</li>
+                                        <li class="mb-2"><strong>Created:</strong> ${formatDate(event.createdDate)}</li>
+                                        ${event.proposedDate ? `<li class="mb-2"><strong>Proposed Date:</strong> ${new Date(event.proposedDate).toLocaleDateString()}</li>` : ''}
+                                        ${event.expectedParticipants ? `<li class="mb-2"><strong>Expected Participants:</strong> ${event.expectedParticipants}</li>` : ''}
+                                        <li class="mb-2"><strong>Likes:</strong> ❤️ ${event.likes}</li>
+                                        <li class="mb-2"><strong>Status:</strong> <span class="status-badge status-${event.status}">${getStatusText(event.status)}</span></li>
+                                        ${event.isEndorsed ? `<li class="mb-2"><strong>Endorsed by:</strong> <span class="badge bg-warning text-dark">${escapeHtml(event.endorsedBy)}</span></li>` : ''}
+                                        ${event.isFacultyChosen ? `<li class="mb-2"><span class="badge bg-warning text-dark">⭐ Faculty Choice Event</span></li>` : ''}
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+
+                displayComments(comments);
+                modal.show();
+            } catch (error) {
+                console.error('Error loading event details:', error);
+                alert('Failed to load event details');
+            }
+        }
+
+        function displayComments(comments) {
+            const container = document.getElementById('commentsContainer');
+            
+            if (comments.length === 0) {
+                container.innerHTML = '<p class="text-muted">No comments yet. Be the first to comment!</p>';
+                return;
+            }
+
+            // Sort comments: faculty first, then by date
+            comments.sort((a, b) => {
+                if (a.authorRole === 'faculty' && b.authorRole !== 'faculty') return -1;
+                if (a.authorRole !== 'faculty' && b.authorRole === 'faculty') return 1;
+                return new Date(b.createdDate) - new Date(a.createdDate);
+            });
+
+            container.innerHTML = comments.map(comment => `
+                <div class="comment-card ${comment.authorRole === 'faculty' ? 'faculty-comment' : ''}">
+                    <div class="d-flex justify-content-between">
+                        <h6 class="mb-1 ${comment.authorRole === 'faculty' ? 'text-primary' : ''}">
+                            ${escapeHtml(comment.authorName)} 
+                            ${comment.authorRole === 'faculty' ? '👨‍🏫' : ''}
+                            ${comment.authorRole === 'admin' ? '⚙️' : ''}
+                        </h6>
+                        <small class="text-muted">${formatDate(comment.createdDate)}</small>
+                    </div>
+                    <p class="mb-0">${escapeHtml(comment.content)}</p>
+                </div>
+            `).join('');
+        }
+
+        async function addComment() {
+            const commentText = document.getElementById('newComment').value.trim();
+            
+            if (!commentText) {
+                alert('Please enter a comment');
+                return;
+            }
+
+            try {
+                const comment = {
+                    content: commentText,
+                    authorName: currentUser.name,
+                    authorRole: currentUser.role,
+                    itemId: currentEventId,
+                    itemType: 'event'
+                };
+
+                const response = await fetch('/api/comments', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(comment)
+                });
+
+                if (response.ok) {
+                    document.getElementById('newComment').value = '';
+                    // Reload comments
+                    const dataResponse = await fetch(`/api/events/${currentEventId}`);
+                    const data = await dataResponse.json();
+                    displayComments(data.comments);
+                } else {
+                    alert('Failed to add comment');
+                }
+            } catch (error) {
+                console.error('Error adding comment:', error);
+                alert('Failed to add comment');
+            }
+        }
+
+        async function toggleLike(eventId) {
+            try {
+                const response = await fetch(`/api/events/${eventId}/like`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ userName: currentUser.name })
+                });
+
+                if (response.ok) {
+                    await loadEvents();
+                }
+            } catch (error) {
+                console.error('Error toggling like:', error);
+            }
+        }
+
+        function showStatusModal(eventId, currentStatus) {
+            if (currentUser.role !== 'admin') {
+                alert('Only administrators can change event status');
+                return;
+            }
+
+            currentEventId = eventId;
+            // Convert status number to string for select value
+            document.getElementById('newStatusSelect').value = currentStatus.toString();
+            const modal = new bootstrap.Modal(document.getElementById('statusModal'));
+            modal.show();
+        }
+
+        async function confirmStatusUpdate() {
+            const newStatus = parseInt(document.getElementById('newStatusSelect').value);
+            
+            try {
+                const response = await fetch(`/api/events/${currentEventId}/status`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ status: newStatus })
+                });
+
+                if (response.ok) {
+                    const modal = bootstrap.Modal.getInstance(document.getElementById('statusModal'));
+                    if (modal) {
+                        modal.hide();
+                    }
+                    await loadEvents();
+                } else {
+                    const errorText = await response.text();
+                    console.error('Status update failed:', errorText);
+                    alert('Failed to update status: ' + errorText);
+                }
+            } catch (error) {
+                console.error('Error updating status:', error);
+                alert('Failed to update status: ' + error.message);
+            }
+        }
+
+        async function deleteEvent(eventId) {
+            if (currentUser.role !== 'admin') {
+                alert('Only administrators can delete events');
+                return;
+            }
+
+            if (!confirm('Are you sure you want to delete this event? This action cannot be undone.')) {
+                return;
+            }
+
+            try {
+                const response = await fetch(`/api/events/${eventId}`, {
+                    method: 'DELETE'
+                });
+
+                if (response.ok) {
+                    alert('Event deleted successfully');
+                    await loadEvents();
+                }
+            } catch (error) {
+                console.error('Error deleting event:', error);
+            }
+        }
+
+        function setupFormSubmission() {
+            const form = document.getElementById('eventForm');
+            form.addEventListener('submit', async function(e) {
+                e.preventDefault();
+
+                const title = document.getElementById('eventTitle').value;
+                const description = document.getElementById('eventDescription').value;
+                const date = document.getElementById('eventDate').value;
+                const participants = document.getElementById('eventParticipants').value;
+
+                const event = {
+                    title: title,
+                    description: description,
+                    author: currentUser.name,
+                    createdDate: new Date().toISOString(),
+                    proposedDate: date ? new Date(date).toISOString() : null,
+                    expectedParticipants: parseInt(participants) || 0
+                };
+
+                try {
+                    const response = await fetch('/api/events', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(event)
+                    });
+
+                    if (response.ok) {
+                        alert('Event suggested successfully! 🎉 It will be reviewed by administrators.');
+                        form.reset();
+                        await loadEvents();
+                        // Scroll to top to see the new event
+                        document.querySelector('.events-panel').scrollTop = 0;
+                    } else {
+                        alert('Failed to submit event. Please try again.');
+                    }
+                } catch (error) {
+                    console.error('Error submitting event:', error);
+                    alert('Failed to submit event. Please try again.');
+                }
+            });
+        }
+
+        function setupFiltering() {
+            const statusFilter = document.getElementById('statusFilter');
+            statusFilter.addEventListener('change', function() {
+                const selectedStatus = this.value;
+                
+                if (selectedStatus === 'all') {
+                    displayEvents(allEvents);
+                } else {
+                    // Convert selected status to number for comparison
+                    const statusNum = parseInt(selectedStatus);
+                    const filtered = allEvents.filter(event => event.status === statusNum);
+                    displayEvents(filtered);
+                }
+            });
+        }
+
+        // Utility functions
+        function truncate(text, length) {
+            return text.length > length ? text.substring(0, length) + '...' : text;
+        }
+
+        function getStatusText(status) {
+            const statusMap = {
+                0: 'Under Review',
+                1: 'Approved',
+                2: 'Planned',
+                3: 'Rejected'
+            };
+            return statusMap[status] || 'Unknown';
+        }
+
+        function formatDate(dateString) {
+            const date = new Date(dateString);
+            const now = new Date();
+            const diffTime = Math.abs(now - date);
+            const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+            
+            if (diffDays === 0) return 'Today';
+            if (diffDays === 1) return 'Yesterday';
+            if (diffDays < 7) return `${diffDays} days ago`;
+            return date.toLocaleDateString();
+        }
+
+        function escapeHtml(text) {
+            const map = {
+                '&': '&amp;',
+                '<': '&lt;',
+                '>': '&gt;',
+                '"': '&quot;',
+                "'": '&#039;'
+            };
+            return text ? text.replace(/[&<>"']/g, m => map[m]) : '';
+        }
+    </script>
+}

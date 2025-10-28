@@ -1,6 +1,6 @@
-﻿@{
+@{
     Layout = null;
-    ViewData["Title"] = "TaskMates - Welcome";
+    ViewData["Title"] = "TaskMates - Select Your Role";
 }
 <!DOCTYPE html>
 <html lang="en">
@@ -10,7 +10,6 @@
     <title>@ViewData["Title"]</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/TaskMates.styles.css" asp-append-version="true" />
     <style>
         .hero-section {
             background: linear-gradient(135deg, #37818a 0%, #43ad7c 100%);
@@ -108,8 +107,8 @@
 
                     <!-- Continue Button -->
                     <div class="mt-5">
-                        <button id="continueBtn" class="btn btn-light btn-lg px-5" style="display: none;" onclick="continueToDashboard()">
-                            Continue to Dashboard →
+                        <button id="continueBtn" class="btn btn-light btn-lg px-5" style="display: none;" onclick="proceedToLogin()">
+                            Proceed to Login →
                         </button>
                     </div>
                 </div>
@@ -167,34 +166,12 @@
             event.currentTarget.classList.add('border', 'border-4', 'border-warning');
         }
 
-        function continueToDashboard() {
+        function proceedToLogin() {
             if (selectedRole) {
-                // Store role in session/localStorage for demo purposes
-                localStorage.setItem('userRole', selectedRole);
-                localStorage.setItem('userName', getDefaultName(selectedRole));
-                localStorage.setItem('userEmail', getDefaultEmail(selectedRole));
-
-                // Redirect to dashboard
-                window.location.href = '@Url.Action("Index", "Home")';
+                // Store selected role temporarily and redirect to login
+                sessionStorage.setItem('selectedRole', selectedRole);
+                window.location.href = '@Url.Action("Login", "Home")';
             }
-        }
-
-        function getDefaultName(role) {
-            const names = {
-                'student': 'Alex Johnson',
-                'faculty': 'Dr. Sarah Williams',
-                'admin': 'Michael Chen'
-            };
-            return names[role] || 'User';
-        }
-
-        function getDefaultEmail(role) {
-            const emails = {
-                'student': 'alex.johnson@university.edu',
-                'faculty': 'sarah.williams@university.edu',
-                'admin': 'michael.chen@university.edu'
-            };
-            return emails[role] || 'user@university.edu';
         }
     </script>
 </body>

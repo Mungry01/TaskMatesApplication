@@ -1,15 +1,376 @@
 ﻿@{
-    ViewData["Title"] = "Taskmates";
+    ViewData["Title"] = "Dashboard - TaskMates";
 }
 
+<style>
+    body {
+        background-color: #f8f9fa;
+    }
 
+    .dashboard-header {
+        background: linear-gradient(135deg, #37818a 0%, #43ad7c 100%);
+        color: white;
+        padding: 2rem;
+        border-radius: 15px;
+        margin-bottom: 2rem;
+        text-align: center;
+    }
 
-<body style="background-color: #fffae5;">
-    <div class="text-center">
-        <h1 class="display-4">Welcome</h1>
-        <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-        <p>HI GUYS </p>
-        <p>no need to keep opening and closing the page</p>
-        <p> oks</p>
+    .feature-card {
+        background: white;
+        border-radius: 15px;
+        padding: 1.5rem;
+        margin-bottom: 1.5rem;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        cursor: pointer;
+    }
+
+    .feature-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 15px rgba(0,0,0,0.2);
+    }
+
+    .card-badge {
+        display: inline-block;
+        padding: 0.5rem 1rem;
+        border-radius: 50px;
+        font-size: 0.85rem;
+        font-weight: bold;
+        margin-right: 0.5rem;
+    }
+
+    .badge-upvotes {
+        background-color: #43ad7c;
+        color: white;
+    }
+
+    .badge-volunteers {
+        background-color: #37818a;
+        color: white;
+    }
+
+    .badge-faculty {
+        background-color: #2c5aa0;
+        color: white;
+    }
+
+    .badge-status {
+        background-color: #f0ad4e;
+        color: white;
+    }
+
+    .section-title {
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: #37818a;
+        margin-bottom: 1rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    .user-info {
+        background: white;
+        border-radius: 10px;
+        padding: 1rem;
+        margin-bottom: 1.5rem;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    }
+
+    .welcome-message {
+        font-size: 1.1rem;
+        color: #333;
+    }
+
+    .role-badge {
+        display: inline-block;
+        padding: 0.25rem 0.75rem;
+        border-radius: 20px;
+        font-size: 0.85rem;
+        font-weight: 600;
+        margin-left: 0.5rem;
+    }
+
+    .role-student { background-color: #43ad7c; color: white; }
+    .role-faculty { background-color: #37818a; color: white; }
+    .role-admin { background-color: #2c5aa0; color: white; }
+</style>
+
+<div class="container-fluid px-4">
+    <!-- User Welcome Section -->
+    <div class="user-info">
+        <div class="d-flex justify-content-between align-items-center">
+            <div class="welcome-message">
+                <span>Welcome back, <strong>@Context.Session.GetString("UserName")</strong></span>
+                @{
+                    var userRole = Context.Session.GetString("UserRole") ?? "student";
+                    var roleClass = $"role-badge role-{userRole}";
+                }
+                <span class="@roleClass">@userRole.ToUpper()</span>
+            </div>
+            <div>
+                <a href="@Url.Action("Logout", "Home")" class="btn btn-outline-danger btn-sm">Logout</a>
+            </div>
+        </div>
     </div>
-</body>
+
+    <!-- Dashboard Header -->
+    <div class="dashboard-header">
+        <h1 class="display-5 fw-bold mb-2">🎯 TaskMates Dashboard</h1>
+        <p class="lead mb-0">Explore top ideas and events from your school community</p>
+    </div>
+
+    <!-- Top Highlights Section -->
+    <div class="row">
+        <!-- Most Upvoted -->
+        <div class="col-lg-4 col-md-6">
+            <div class="section-title">
+                <span>🏆</span> Most Upvoted
+            </div>
+            <div id="mostUpvoted" class="feature-card" onclick="viewDetails('mostUpvoted')">
+                <div class="mb-2">
+                    <span class="card-badge badge-upvotes">Loading...</span>
+                </div>
+                <h5 class="fw-bold mb-2">Loading...</h5>
+                <p class="text-muted mb-2">Loading content...</p>
+                <small class="text-secondary">By Loading...</small>
+            </div>
+        </div>
+
+        <!-- Most Volunteered -->
+        <div class="col-lg-4 col-md-6">
+            <div class="section-title">
+                <span>🤝</span> Most Volunteered
+            </div>
+            <div id="mostVolunteered" class="feature-card" onclick="viewDetails('mostVolunteered')">
+                <div class="mb-2">
+                    <span class="card-badge badge-volunteers">Loading...</span>
+                </div>
+                <h5 class="fw-bold mb-2">Loading...</h5>
+                <p class="text-muted mb-2">Loading content...</p>
+                <small class="text-secondary">By Loading...</small>
+            </div>
+        </div>
+
+        <!-- Faculty Chosen -->
+        <div class="col-lg-4 col-md-12">
+            <div class="section-title">
+                <span>⭐</span> Faculty Chosen
+            </div>
+            <div id="facultyChosen" class="feature-card" onclick="viewDetails('facultyChosen')">
+                <div class="mb-2">
+                    <span class="card-badge badge-faculty">Loading...</span>
+                </div>
+                <h5 class="fw-bold mb-2">Loading...</h5>
+                <p class="text-muted mb-2">Loading content...</p>
+                <small class="text-secondary">By Loading...</small>
+            </div>
+        </div>
+    </div>
+
+    <!-- Recent Activity Section -->
+    <div class="row mt-4">
+        <div class="col-12">
+            <div class="section-title">
+                <span>📊</span> Recent Activity
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="feature-card">
+                <h6 class="fw-bold mb-3">📝 Recent Ideas</h6>
+                <div id="recentIdeas">Loading...</div>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="feature-card">
+                <h6 class="fw-bold mb-3">📅 Upcoming Events</h6>
+                <div id="recentEvents">Loading...</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        // Get user info from server-side session (no localStorage needed)
+        let currentUser = {
+            name: '@Context.Session.GetString("UserName")',
+            role: '@Context.Session.GetString("UserRole")',
+            email: '@Context.Session.GetString("UserEmail")'
+        };
+
+        // Load dashboard data
+        async function loadDashboard() {
+            try {
+                const [ideasResponse, eventsResponse] = await Promise.all([
+                    fetch('/api/ideas'),
+                    fetch('/api/events')
+                ]);
+
+                const ideas = await ideasResponse.json();
+                const events = await eventsResponse.json();
+
+                // Most Upvoted (could be idea or event)
+                const allItems = [...ideas.map(i => ({...i, type: 'idea'})), ...events.map(e => ({...e, type: 'event'}))];
+                const mostUpvoted = allItems.sort((a, b) => b.likes - a.likes)[0];
+
+                if (mostUpvoted) {
+                    const upvotedCard = document.getElementById('mostUpvoted');
+                    upvotedCard.innerHTML = `
+                        <div class="mb-2">
+                            <span class="card-badge badge-upvotes">❤️ ${mostUpvoted.likes} Likes</span>
+                            <span class="badge bg-secondary">${mostUpvoted.type === 'idea' ? 'Idea' : 'Event'}</span>
+                        </div>
+                        <h5 class="fw-bold mb-2">${mostUpvoted.title}</h5>
+                        <p class="text-muted mb-2">${truncate(mostUpvoted.description, 100)}</p>
+                        <small class="text-secondary">By ${mostUpvoted.author}</small>
+                    `;
+                    upvotedCard.setAttribute('data-id', mostUpvoted.id);
+                    upvotedCard.setAttribute('data-type', mostUpvoted.type);
+                }
+
+                // Most Volunteered (idea)
+                const mostVolunteered = ideas.sort((a, b) => b.volunteers - a.volunteers)[0];
+
+                if (mostVolunteered) {
+                    const volunteeredCard = document.getElementById('mostVolunteered');
+                    volunteeredCard.innerHTML = `
+                        <div class="mb-2">
+                            <span class="card-badge badge-volunteers">🤝 ${mostVolunteered.volunteers} Volunteers</span>
+                            <span class="badge bg-secondary">Idea</span>
+                        </div>
+                        <h5 class="fw-bold mb-2">${mostVolunteered.title}</h5>
+                        <p class="text-muted mb-2">${truncate(mostVolunteered.description, 100)}</p>
+                        <small class="text-secondary">By ${mostVolunteered.author}</small>
+                    `;
+                    volunteeredCard.setAttribute('data-id', mostVolunteered.id);
+                    volunteeredCard.setAttribute('data-type', 'idea');
+                }
+
+                // Faculty Chosen Event - Only show approved or planned events
+                const approvedEvents = events.filter(e => e.status === 1 || e.status === 2); // Approved or Planned
+                const facultyChosen = approvedEvents.find(e => e.isFacultyChosen) || approvedEvents.filter(e => e.isEndorsed)[0];
+
+                const chosenCard = document.getElementById('facultyChosen');
+                if (facultyChosen) {
+                    chosenCard.innerHTML = `
+                        <div class="mb-2">
+                            <span class="card-badge badge-faculty">⭐ Faculty Choice</span>
+                            <span class="badge" style="background-color: ${getStatusColor(facultyChosen.status)}; color: white;">${getStatusText(facultyChosen.status)}</span>
+                        </div>
+                        <h5 class="fw-bold mb-2">${facultyChosen.title}</h5>
+                        <p class="text-muted mb-2">${truncate(facultyChosen.description, 100)}</p>
+                        <small class="text-secondary">${facultyChosen.endorsedBy ? 'Endorsed by ' + facultyChosen.endorsedBy : 'By ' + facultyChosen.author}</small>
+                    `;
+                    chosenCard.setAttribute('data-id', facultyChosen.id);
+                    chosenCard.setAttribute('data-type', 'event');
+                    chosenCard.style.cursor = 'pointer';
+                } else {
+                    chosenCard.innerHTML = `
+                        <div class="text-center py-4">
+                            <div class="mb-3" style="font-size: 3rem; opacity: 0.3;">⭐</div>
+                            <h6 class="text-muted">No Events Chosen At This Time</h6>
+                            <p class="text-muted small mb-0">Faculty endorsed events will appear here</p>
+                        </div>
+                    `;
+                    chosenCard.style.cursor = 'default';
+                    chosenCard.onclick = null;
+                }
+
+                // Recent Ideas
+                const recentIdeasHtml = ideas.slice(0, 3).map(idea => `
+                    <div class="d-flex justify-content-between align-items-center py-2 border-bottom">
+                        <div>
+                            <div class="fw-bold">${idea.title}</div>
+                            <small class="text-muted">${idea.author} • ${formatDate(idea.createdDate)}</small>
+                        </div>
+                        <div>
+                            <span class="badge bg-success">❤️ ${idea.likes}</span>
+                        </div>
+                    </div>
+                `).join('');
+                document.getElementById('recentIdeas').innerHTML = recentIdeasHtml;
+
+                // Upcoming Events - Only show approved or planned events
+                const upcomingEvents = events.filter(e => e.status === 1 || e.status === 2); // Approved or Planned
+                
+                if (upcomingEvents.length > 0) {
+                    const recentEventsHtml = upcomingEvents.slice(0, 3).map(event => `
+                        <div class="d-flex justify-content-between align-items-center py-2 border-bottom">
+                            <div>
+                                <div class="fw-bold">${event.title}</div>
+                                <small class="text-muted">${event.author} • ${formatDate(event.createdDate)}</small>
+                            </div>
+                            <div>
+                                <span class="badge" style="background-color: ${getStatusColor(event.status)}; color: white;">${getStatusText(event.status)}</span>
+                            </div>
+                        </div>
+                    `).join('');
+                    document.getElementById('recentEvents').innerHTML = recentEventsHtml;
+                } else {
+                    document.getElementById('recentEvents').innerHTML = `
+                        <div class="text-center py-3">
+                            <div class="mb-2" style="font-size: 2rem; opacity: 0.3;">📅</div>
+                            <p class="text-muted mb-0">No Upcoming Events</p>
+                        </div>
+                    `;
+                }
+
+            } catch (error) {
+                console.error('Error loading dashboard:', error);
+            }
+        }
+
+        function viewDetails(cardId) {
+            const card = document.getElementById(cardId);
+            const type = card.getAttribute('data-type');
+            const id = card.getAttribute('data-id');
+            
+            if (type === 'idea') {
+                window.location.href = '@Url.Action("Ideas", "Home")?id=' + id;
+            } else if (type === 'event') {
+                window.location.href = '@Url.Action("Events", "Home")?id=' + id;
+            }
+        }
+
+        function truncate(text, length) {
+            return text.length > length ? text.substring(0, length) + '...' : text;
+        }
+
+        function formatDate(dateString) {
+            const date = new Date(dateString);
+            const now = new Date();
+            const diffTime = Math.abs(now - date);
+            const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+            
+            if (diffDays === 0) return 'Today';
+            if (diffDays === 1) return 'Yesterday';
+            if (diffDays < 7) return `${diffDays} days ago`;
+            return date.toLocaleDateString();
+        }
+
+        function getStatusColor(status) {
+            const colors = {
+                0: '#f59e0b', // Under Review - Orange
+                1: '#10b981', // Approved - Green
+                2: '#3b82f6', // Planned - Blue
+                3: '#ef4444'  // Rejected - Red
+            };
+            return colors[status] || '#6c757d';
+        }
+
+        function getStatusText(status) {
+            const statusMap = {
+                0: 'Under Review',
+                1: 'Approved',
+                2: 'Planned',
+                3: 'Rejected'
+            };
+            return statusMap[status] || 'Unknown';
+        }
+
+        // Load dashboard on page load
+        loadDashboard();
+    </script>
+}

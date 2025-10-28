@@ -1,0 +1,153 @@
+@{
+    Layout = null;
+    ViewData["Title"] = "Register - TaskMates";
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"]</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <style>
+        .register-section {
+            background: linear-gradient(135deg, #37818a 0%, #43ad7c 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 40px 0;
+        }
+
+        .register-card {
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .role-badge {
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .btn-register {
+            padding: 12px;
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <div class="register-section">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-6">
+                    <div class="card register-card">
+                        <div class="card-body p-5">
+                            <div class="text-center mb-4">
+                                <h2 class="fw-bold mb-3">Create Account</h2>
+                                <p class="text-muted">Join TaskMates as a</p>
+                                <span id="roleBadge" class="role-badge bg-primary text-white"></span>
+                            </div>
+
+                            @if (TempData["ErrorMessage"] != null)
+                            {
+                                <div class="alert alert-danger" role="alert">
+                                    @TempData["ErrorMessage"]
+                                </div>
+                            }
+
+                            @if (TempData["SuccessMessage"] != null)
+                            {
+                                <div class="alert alert-success" role="alert">
+                                    @TempData["SuccessMessage"]
+                                </div>
+                            }
+
+                            <form asp-action="Register" asp-controller="Home" method="post">
+                                <input type="hidden" id="roleInput" name="role" value="" />
+                                
+                                <div class="mb-3">
+                                    <label for="username" class="form-label">Username <span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" id="username" name="username" required placeholder="Choose a username">
+                                    <small class="form-text text-muted">Username must be unique</small>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="password" class="form-label">Password <span class="text-danger">*</span></label>
+                                    <input type="password" class="form-control" id="password" name="password" required placeholder="Create a password">
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="confirmPassword" class="form-label">Confirm Password <span class="text-danger">*</span></label>
+                                    <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" required placeholder="Confirm your password">
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="name" class="form-label">Full Name <span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" id="name" name="name" required placeholder="Enter your full name">
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="email" class="form-label">Email <span class="text-danger">*</span></label>
+                                    <input type="email" class="form-control" id="email" name="email" required placeholder="Enter your email">
+                                </div>
+
+                                <div class="mb-4">
+                                    <label for="position" class="form-label">Position/Department</label>
+                                    <input type="text" class="form-control" id="position" name="position" placeholder="e.g., Computer Science, 4th Year">
+                                </div>
+
+                                <button type="submit" class="btn btn-primary w-100 btn-register mb-3">Create Account</button>
+                            </form>
+
+                            <div class="text-center">
+                                <p class="mb-2">Already have an account? <a href="@Url.Action("Login", "Home")" class="text-decoration-none fw-bold">Sign In</a></p>
+                                <a href="@Url.Action("RoleSelection", "Home")" class="text-muted text-decoration-none">← Change Role</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Get the selected role from session storage
+        const selectedRole = sessionStorage.getItem('selectedRole') || 'student';
+        document.getElementById('roleInput').value = selectedRole;
+        
+        // Display role badge
+        const roleBadge = document.getElementById('roleBadge');
+        const roleNames = {
+            'student': '🎓 Student',
+            'faculty': '👨‍🏫 Faculty',
+            'admin': '⚙️ Administrator'
+        };
+        roleBadge.textContent = roleNames[selectedRole] || 'Student';
+        
+        // Set badge color based on role
+        if (selectedRole === 'student') {
+            roleBadge.style.backgroundColor = '#43ad7c';
+        } else if (selectedRole === 'faculty') {
+            roleBadge.style.backgroundColor = '#37818a';
+        } else if (selectedRole === 'admin') {
+            roleBadge.style.backgroundColor = '#2c5aa0';
+        }
+
+        // Form validation
+        document.querySelector('form').addEventListener('submit', function(e) {
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+            
+            if (password !== confirmPassword) {
+                e.preventDefault();
+                alert('Passwords do not match!');
+                return false;
+            }
+        });
+    </script>
+</body>
+</html>
+

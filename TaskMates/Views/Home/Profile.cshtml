@@ -1,100 +1,508 @@
 ﻿@{
-    ViewData["Title"] = "Profile";
+    ViewData["Title"] = "Profile - TaskMates";
 }
 
-<body style="background-color: #fffae5;">
-    <div class="container py-3">
+<style>
+    body {
+        background-color: #f8f9fa;
+    }
 
-        <!-- Header -->
-        <div class="d-flex justify-content-between align-items-center px-3 py-2">
-            <h1 class="h4 mb-0">👤 Profile</h1>
+    .profile-header {
+        background: linear-gradient(135deg, #37818a 0%, #43ad7c 100%);
+        color: white;
+        padding: 2rem;
+        border-radius: 15px;
+        margin-bottom: 2rem;
+    }
+
+    .profile-avatar {
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+        background: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 3rem;
+        margin-bottom: 1rem;
+    }
+
+    .info-card {
+        background: white;
+        border-radius: 15px;
+        padding: 2rem;
+        margin-bottom: 1.5rem;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+
+    .info-item {
+        display: flex;
+        justify-content: space-between;
+        padding: 1rem 0;
+        border-bottom: 1px solid #e9ecef;
+    }
+
+    .info-item:last-child {
+        border-bottom: none;
+    }
+
+    .info-label {
+        font-weight: bold;
+        color: #6c757d;
+    }
+
+    .info-value {
+        color: #212529;
+    }
+
+    .activity-card {
+        background: white;
+        border-radius: 10px;
+        padding: 1rem;
+        margin-bottom: 1rem;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        transition: transform 0.2s ease;
+        cursor: pointer;
+    }
+
+    .activity-card:hover {
+        transform: translateX(5px);
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+
+    .section-title {
+        font-size: 1.25rem;
+        font-weight: bold;
+        color: #37818a;
+        margin-bottom: 1rem;
+        padding-bottom: 0.5rem;
+        border-bottom: 2px solid #37818a;
+    }
+
+    .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 1rem;
+        margin-bottom: 2rem;
+    }
+
+    .stat-box {
+        background: white;
+        border-radius: 10px;
+        padding: 1.5rem;
+        text-align: center;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    }
+
+    .stat-number {
+        font-size: 2rem;
+        font-weight: bold;
+        color: #37818a;
+    }
+
+    .stat-label {
+        color: #6c757d;
+        font-size: 0.9rem;
+    }
+
+    .role-badge-large {
+        display: inline-block;
+        padding: 0.5rem 1.5rem;
+        border-radius: 25px;
+        font-size: 1rem;
+        font-weight: 600;
+        margin-top: 0.5rem;
+    }
+
+    .role-student { background-color: #43ad7c; color: white; }
+    .role-faculty { background-color: #37818a; color: white; }
+    .role-admin { background-color: #2c5aa0; color: white; }
+</style>
+
+<div class="container-fluid px-4">
+    <!-- Profile Header -->
+    <div class="profile-header text-center">
+        <div class="profile-avatar mx-auto" id="profileAvatar">
+            👤
         </div>
-
-        <!-- Profile Info Panel -->
-        <div class="card shadow-sm mb-4" style="background-color: #ffbd59;">
-            <div class="card-body d-flex align-items-center">
-                <!-- Avatar -->
-                <div class="rounded-circle bg-light me-3" style="width: 60px; height: 60px;"></div>
-
-                <!-- Info -->
-                <div>
-                    <h5 class="mb-0 fw-bold">Avion Aurelis</h5>
-                    <p class="mb-1">sanchez@university.edu</p>
-                    <small>Member Since <b>1/1/2024</b></small>
-                </div>
-
-                <!-- Stats -->
-                <div class="ms-auto text-end">
-                    <p class="mb-0"><b>4</b> Ideas Submitted</p>
-                    <p class="mb-0"><b>4</b> Events Suggested</p>
-                    <p class="mb-0"> Volunteered in <b>4</b> Ideas </p>
-                </div>
-            </div>
-        </div>
-
-        <!-- Ideas Submitted Panel -->
-        <div class="card shadow-sm mb-4" style="background-color: #ffcc80;">
-            <div class="card-header fw-bold">💡 Ideas Submitted</div>
-            <div class="card-body" style="max-height: 150px; overflow-y: auto;">
-                <ul class="list-unstyled mb-0">
-                    <li class="p-2 mb-2 rounded" style="background-color: #ff8a65; color: white;">
-                        Stop-motion Sculpture
-                    </li>
-                    <li class="p-2 mb-2 rounded" style="background-color: #ff8a65; color: white;">
-                        Community Garden Project
-                    </li>
-                    <li class="p-2 mb-2 rounded" style="background-color: #ff8a65; color: white;">
-                        Community Garden Project
-                    </li>
-                    <li class="p-2 mb-2 rounded" style="background-color: #ff8a65; color: white;">
-                        Community Garden Project
-                    </li>
-                </ul>
-            </div>
-        </div>
-
-        <!-- Events Suggested Panel -->
-        <div class="card shadow-sm mb-4" style="background-color: #ffcc80;">
-            <div class="card-header fw-bold">📅 Events Suggested</div>
-            <div class="card-body" style="max-height: 150px; overflow-y: auto;">
-                <ul class="list-unstyled mb-0">
-                    <li class="p-2 mb-2 rounded" style="background-color: #ff8a65; color: white;">
-                        Programming Workshop Series
-                    </li>
-                    <li class="p-2 mb-2 rounded" style="background-color: #ff8a65; color: white;">
-                        Hackathon 2025
-                    </li>
-                    <li class="p-2 mb-2 rounded" style="background-color: #ff8a65; color: white;">
-                        Community Garden Project
-                    </li>
-                    <li class="p-2 mb-2 rounded" style="background-color: #ff8a65; color: white;">
-                        Community Garden Project
-                    </li>
-                </ul>
-            </div>
-        </div>
-
-        <!-- Volunteering History Panel -->
-        <div class="card shadow-sm mb-4" style="background-color: #ffcc80;">
-            <div class="card-header fw-bold">🤝 Volunteering History</div>
-            <div class="card-body" style="max-height: 150px; overflow-y: auto;">
-                <ul class="list-unstyled mb-0">
-                    <li class="p-2 mb-2 rounded" style="background-color: #ff8a65; color: white;">
-                        Stop-motion Sculpture
-                    </li>
-                    <li class="p-2 mb-2 rounded" style="background-color: #ff8a65; color: white;">
-                        Campus Clean-Up Drive
-                    </li>
-                    <li class="p-2 mb-2 rounded" style="background-color: #ff8a65; color: white;">
-                        Community Garden Project
-                    </li>
-                    <li class="p-2 mb-2 rounded" style="background-color: #ff8a65; color: white;">
-                        Community Garden Project
-                    </li>
-                </ul>
-            </div>
-        </div>
-
+        <h1 class="h2 fw-bold mb-2" id="profileName">Loading...</h1>
+        <p class="mb-2" id="profileEmail">email@university.edu</p>
+        <span class="role-badge-large" id="profileRole">User</span>
     </div>
-</body>
- 
+
+    <!-- Basic Information -->
+    <div class="row">
+        <div class="col-lg-4">
+            <div class="info-card">
+                <h5 class="section-title">📋 Basic Information</h5>
+                <div class="info-item">
+                    <span class="info-label">Name</span>
+                    <span class="info-value" id="infoName">-</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">Position</span>
+                    <span class="info-value" id="infoPosition">-</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">Email</span>
+                    <span class="info-value" id="infoEmail">-</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">Member Since</span>
+                    <span class="info-value" id="infoDate">-</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-8">
+            <!-- Statistics -->
+            <div class="stats-grid" id="statsContainer">
+                <!-- Stats will be populated by JavaScript -->
+            </div>
+
+            <!-- Activity Sections -->
+            <div id="activitySections">
+                <!-- Activity sections will be populated by JavaScript based on role -->
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        // Get user info from server-side session
+        let currentUser = {
+            name: '@Context.Session.GetString("UserName")',
+            role: '@Context.Session.GetString("UserRole")',
+            email: '@Context.Session.GetString("UserEmail")'
+        };
+
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', function() {
+            loadProfile();
+        });
+
+        async function loadProfile() {
+            // Set basic profile info
+            document.getElementById('profileName').textContent = currentUser.name;
+            document.getElementById('profileEmail').textContent = currentUser.email;
+            document.getElementById('infoName').textContent = currentUser.name;
+            document.getElementById('infoEmail').textContent = currentUser.email;
+
+            // Set role badge
+            const roleBadge = document.getElementById('profileRole');
+            const roleText = currentUser.role.charAt(0).toUpperCase() + currentUser.role.slice(1);
+            roleBadge.textContent = roleText;
+            roleBadge.className = `role-badge-large role-${currentUser.role}`;
+
+            // Set avatar emoji based on role
+            const avatarEmojis = {
+                'student': '🎓',
+                'faculty': '👨‍🏫',
+                'admin': '⚙️'
+            };
+            document.getElementById('profileAvatar').textContent = avatarEmojis[currentUser.role] || '👤';
+
+            // Set position based on role
+            const positions = {
+                'student': 'Student',
+                'faculty': 'Faculty Member',
+                'admin': 'Administrator'
+            };
+            document.getElementById('infoPosition').textContent = positions[currentUser.role];
+
+            // Set member since date (simulate)
+            const memberSince = new Date();
+            memberSince.setMonth(memberSince.getMonth() - 6);
+            document.getElementById('infoDate').textContent = memberSince.toLocaleDateString('en-US', { 
+                year: 'numeric', 
+                month: 'long', 
+                day: 'numeric' 
+            });
+
+            // Load role-specific content
+            try {
+                const [ideasResponse, eventsResponse] = await Promise.all([
+                    fetch('/api/ideas'),
+                    fetch('/api/events')
+                ]);
+
+                const ideas = await ideasResponse.json();
+                const events = await eventsResponse.json();
+
+                if (currentUser.role === 'student') {
+                    displayStudentProfile(ideas, events);
+                } else if (currentUser.role === 'faculty') {
+                    displayFacultyProfile(ideas, events);
+                } else if (currentUser.role === 'admin') {
+                    displayAdminProfile(ideas, events);
+                }
+            } catch (error) {
+                console.error('Error loading profile data:', error);
+            }
+        }
+
+        function displayStudentProfile(ideas, events) {
+            // Filter by author
+            const myIdeas = ideas.filter(idea => idea.author === currentUser.name);
+            const myEvents = events.filter(event => event.author === currentUser.name);
+            const volunteeredIdeas = ideas.filter(idea => idea.volunteeredBy && idea.volunteeredBy.includes(currentUser.name));
+
+            // Display statistics
+            document.getElementById('statsContainer').innerHTML = `
+                <div class="stat-box">
+                    <div class="stat-number">${myIdeas.length}</div>
+                    <div class="stat-label">Ideas Submitted</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-number">${myEvents.length}</div>
+                    <div class="stat-label">Events Suggested</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-number">${volunteeredIdeas.length}</div>
+                    <div class="stat-label">Volunteering</div>
+                </div>
+            `;
+
+            // Display activities
+            document.getElementById('activitySections').innerHTML = `
+                <div class="info-card">
+                    <h5 class="section-title">💡 My Submitted Ideas</h5>
+                    ${myIdeas.length > 0 ? myIdeas.map(idea => `
+                        <div class="activity-card" onclick="window.location.href='/Home/Ideas?id=${idea.id}'">
+                            <div class="d-flex justify-content-between align-items-start">
+                                <div>
+                                    <h6 class="fw-bold mb-1">${escapeHtml(idea.title)}</h6>
+                                    <small class="text-muted">${idea.course} • ${formatDate(idea.createdDate)}</small>
+                                </div>
+                                <div class="text-end">
+                                    <span class="badge bg-success">❤️ ${idea.likes}</span>
+                                    <span class="badge bg-warning text-dark">🤝 ${idea.volunteers}</span>
+                                    ${idea.isEndorsed ? '<span class="badge bg-info">✅ Endorsed</span>' : ''}
+                                </div>
+                            </div>
+                        </div>
+                    `).join('') : '<p class="text-muted">No ideas submitted yet.</p>'}
+                </div>
+
+                <div class="info-card">
+                    <h5 class="section-title">📅 My Suggested Events</h5>
+                    ${myEvents.length > 0 ? myEvents.map(event => `
+                        <div class="activity-card" onclick="window.location.href='/Home/Events?id=${event.id}'">
+                            <div class="d-flex justify-content-between align-items-start">
+                                <div>
+                                    <h6 class="fw-bold mb-1">${escapeHtml(event.title)}</h6>
+                                    <small class="text-muted">${formatDate(event.createdDate)}</small>
+                                </div>
+                                <div class="text-end">
+                                    <span class="badge bg-${getStatusClass(event.status)}">${getStatusText(event.status)}</span>
+                                    <span class="badge bg-success">❤️ ${event.likes}</span>
+                                </div>
+                            </div>
+                        </div>
+                    `).join('') : '<p class="text-muted">No events suggested yet.</p>'}
+                </div>
+
+                <div class="info-card">
+                    <h5 class="section-title">🤝 Volunteering History</h5>
+                    ${volunteeredIdeas.length > 0 ? volunteeredIdeas.map(idea => `
+                        <div class="activity-card" onclick="window.location.href='/Home/Ideas?id=${idea.id}'">
+                            <div class="d-flex justify-content-between align-items-start">
+                                <div>
+                                    <h6 class="fw-bold mb-1">${escapeHtml(idea.title)}</h6>
+                                    <small class="text-muted">By ${escapeHtml(idea.author)} • ${idea.course}</small>
+                                </div>
+                                <div>
+                                    <span class="badge bg-primary">Volunteering</span>
+                                </div>
+                            </div>
+                        </div>
+                    `).join('') : '<p class="text-muted">Not volunteering for any projects yet.</p>'}
+                </div>
+            `;
+        }
+
+        function displayFacultyProfile(ideas, events) {
+            // Filter endorsed items
+            const endorsedIdeas = ideas.filter(idea => idea.endorsedBy === currentUser.name);
+            const endorsedEvents = events.filter(event => event.endorsedBy === currentUser.name);
+            const totalEndorsements = endorsedIdeas.length + endorsedEvents.length;
+
+            // Display statistics
+            document.getElementById('statsContainer').innerHTML = `
+                <div class="stat-box">
+                    <div class="stat-number">${totalEndorsements}</div>
+                    <div class="stat-label">Total Endorsements</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-number">${endorsedIdeas.length}</div>
+                    <div class="stat-label">Ideas Endorsed</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-number">${endorsedEvents.length}</div>
+                    <div class="stat-label">Events Endorsed</div>
+                </div>
+            `;
+
+            // Display activities
+            document.getElementById('activitySections').innerHTML = `
+                <div class="info-card">
+                    <h5 class="section-title">✅ Endorsed Ideas</h5>
+                    ${endorsedIdeas.length > 0 ? endorsedIdeas.map(idea => `
+                        <div class="activity-card" onclick="window.location.href='/Home/Ideas?id=${idea.id}'">
+                            <div class="d-flex justify-content-between align-items-start">
+                                <div>
+                                    <h6 class="fw-bold mb-1">${escapeHtml(idea.title)}</h6>
+                                    <small class="text-muted">By ${escapeHtml(idea.author)} • ${idea.course}</small>
+                                </div>
+                                <div class="text-end">
+                                    <span class="badge bg-success">❤️ ${idea.likes}</span>
+                                    <span class="badge bg-warning text-dark">🤝 ${idea.volunteers}</span>
+                                </div>
+                            </div>
+                        </div>
+                    `).join('') : '<p class="text-muted">No ideas endorsed yet.</p>'}
+                </div>
+
+                <div class="info-card">
+                    <h5 class="section-title">✅ Endorsed Events</h5>
+                    ${endorsedEvents.length > 0 ? endorsedEvents.map(event => `
+                        <div class="activity-card" onclick="window.location.href='/Home/Events?id=${event.id}'">
+                            <div class="d-flex justify-content-between align-items-start">
+                                <div>
+                                    <h6 class="fw-bold mb-1">${escapeHtml(event.title)}</h6>
+                                    <small class="text-muted">By ${escapeHtml(event.author)}</small>
+                                </div>
+                                <div class="text-end">
+                                    <span class="badge bg-${getStatusClass(event.status)}">${getStatusText(event.status)}</span>
+                                    <span class="badge bg-success">❤️ ${event.likes}</span>
+                                </div>
+                            </div>
+                        </div>
+                    `).join('') : '<p class="text-muted">No events endorsed yet.</p>'}
+                </div>
+            `;
+        }
+
+        function displayAdminProfile(ideas, events) {
+            // Calculate statistics (status: 0=UnderReview, 1=Approved, 2=Planned, 3=Rejected)
+            const pendingReview = events.filter(e => e.status === 0).length;
+            const approvedEvents = events.filter(e => e.status === 1 || e.status === 2).length;
+
+            // Display statistics
+            document.getElementById('statsContainer').innerHTML = `
+                <div class="stat-box">
+                    <div class="stat-number">${ideas.length}</div>
+                    <div class="stat-label">Total Ideas</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-number">${events.length}</div>
+                    <div class="stat-label">Total Events</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-number">${pendingReview}</div>
+                    <div class="stat-label">Pending Review</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-number">${approvedEvents}</div>
+                    <div class="stat-label">Approved Events</div>
+                </div>
+            `;
+
+            // Display management overview
+            document.getElementById('activitySections').innerHTML = `
+                <div class="info-card">
+                    <h5 class="section-title">📊 Platform Overview</h5>
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <div class="card bg-light">
+                                <div class="card-body">
+                                    <h6 class="fw-bold">Ideas Management</h6>
+                                    <ul class="list-unstyled mb-0">
+                                        <li class="mb-2">Total Ideas: <strong>${ideas.length}</strong></li>
+                                        <li class="mb-2">Endorsed: <strong>${ideas.filter(i => i.isEndorsed).length}</strong></li>
+                                        <li class="mb-2">Pending Endorsement: <strong>${ideas.filter(i => !i.isEndorsed).length}</strong></li>
+                                        <li class="mb-2">Total Volunteers: <strong>${ideas.reduce((sum, idea) => sum + idea.volunteers, 0)}</strong></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card bg-light">
+                                <div class="card-body">
+                                    <h6 class="fw-bold">Events Management</h6>
+                                    <ul class="list-unstyled mb-0">
+                                        <li class="mb-2">Total Events: <strong>${events.length}</strong></li>
+                                        <li class="mb-2">Under Review: <strong>${events.filter(e => e.status === 0).length}</strong></li>
+                                        <li class="mb-2">Approved: <strong>${events.filter(e => e.status === 1).length}</strong></li>
+                                        <li class="mb-2">Planned: <strong>${events.filter(e => e.status === 2).length}</strong></li>
+                                        <li class="mb-2">Rejected: <strong>${events.filter(e => e.status === 3).length}</strong></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info-card">
+                    <h5 class="section-title">⚠️ Items Pending Review</h5>
+                    ${events.filter(e => e.status === 'UnderReview').length > 0 ? events.filter(e => e.status === 'UnderReview').map(event => `
+                        <div class="activity-card" onclick="window.location.href='/Home/Events?id=${event.id}'">
+                            <div class="d-flex justify-content-between align-items-start">
+                                <div>
+                                    <h6 class="fw-bold mb-1">${escapeHtml(event.title)}</h6>
+                                    <small class="text-muted">By ${escapeHtml(event.author)} • ${formatDate(event.createdDate)}</small>
+                                </div>
+                                <div>
+                                    <span class="badge bg-warning">Under Review</span>
+                                </div>
+                            </div>
+                        </div>
+                    `).join('') : '<p class="text-muted">No items pending review.</p>'}
+                </div>
+            `;
+        }
+
+        // Utility functions
+        function formatDate(dateString) {
+            const date = new Date(dateString);
+            return date.toLocaleDateString('en-US', { 
+                year: 'numeric', 
+                month: 'short', 
+                day: 'numeric' 
+            });
+        }
+
+        function escapeHtml(text) {
+            const map = {
+                '&': '&amp;',
+                '<': '&lt;',
+                '>': '&gt;',
+                '"': '&quot;',
+                "'": '&#039;'
+            };
+            return text ? text.replace(/[&<>"']/g, m => map[m]) : '';
+        }
+
+        function getStatusClass(status) {
+            // Map numeric status to Bootstrap color classes
+            const statusClasses = {
+                0: 'warning',   // Under Review
+                1: 'success',   // Approved
+                2: 'info',      // Planned
+                3: 'danger'     // Rejected
+            };
+            return statusClasses[status] || 'secondary';
+        }
+
+        function getStatusText(status) {
+            const statusMap = {
+                0: 'Under Review',
+                1: 'Approved',
+                2: 'Planned',
+                3: 'Rejected'
+            };
+            return statusMap[status] || 'Unknown';
+        }
+    </script>
+}
